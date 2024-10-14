@@ -25,8 +25,23 @@
     * 서비스 제공자 프레임워크를 만드는 근간이 된다.  ex) JDBC
 
 * 단점
-  1) 상속하려면 public, protected 생성자가 필요하니 정적 팩터리 메서드만 제공하면 하위 클래스를 만들 수 없다.
-  2) 정적 팩토리 메서드는 프로그래머가 찾기 힘들다.
+1) 상속하려면 public, protected 생성자가 필요하니 정적 팩터리 메서드만 제공하면 하위 클래스를 만들 수 없다.
+ * 상속 대신 해당 객체를 멤버변수로 가지는 CLASS로 만들수 있다.
+```java
+class Setting {
+  private Setting() {
+  }
+}
+
+class AdvancedSetting {
+  Setting setting;
+}
+```
+ * 아니면 private 생성자를 그냥 public으로 열어둔다. ex) List. List.of로 쓸수도 new ArrayList()로 쓸수도 있다.
+
+***특히 문서화를 잘해라. javadoc을 사용하면 더 좋다***
+  
+2) 정적 팩토리 메서드는 프로그래머가 찾기 힘들다.
  
 * 단점 2)의 보완을 위해 메서드명을 잘 지어야 한다. 이를 위한 관례는 아래와 같다.
     * from : 매개변수를 하나 받아서 해당 타입의 인스턴스를 반환하는 형변환 메서드
