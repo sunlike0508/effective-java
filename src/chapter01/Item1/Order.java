@@ -1,5 +1,8 @@
-package chapter02.Item1;
+package chapter01.Item1;
 
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.EnumSet;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +16,8 @@ public class Order {
     private boolean urgent;
 
     private String menu;
+
+    private OrderStatus orderStatus;
 
     /**
      * 기본 생성자
@@ -55,6 +60,16 @@ public class Order {
         order.urgent = true;
         order.menu = menu;
         return order;
+    }
+
+    public static void main(String[] args) {
+        Arrays.stream(OrderStatus.values()).forEach(System.out::println);
+
+        Arrays.stream(OrderStatus.values()).forEach(orderStatus1 -> System.out.println(orderStatus1.getDescription()));
+
+        EnumMap<OrderStatus, String> map = new EnumMap<>(OrderStatus.class);
+
+        EnumSet<OrderStatus> set = EnumSet.allOf(OrderStatus.class);
     }
 
 }

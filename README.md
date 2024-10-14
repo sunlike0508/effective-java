@@ -42,9 +42,63 @@
      
 **정리 : 정적 팩터리 메서드와 public 생성자는 각자의 쓰임새가 있으니 상대적인 장단점을 잘 파악하고 쓰자. 그래도 정적 팩터리가 유리한 경우가 많다.**
 
+### 완벽 공략 1. 열거 타입
 
+**이뮴이라고 보통 부른다. 외국인들은. 왜냐하면 enumeration이기 때문에.
 
- 
+* 상수 목록을 담을 데이터 타입
+* 특정한 변수가 가질 수 있는 값을 제한할 수 있다. (Type-Safety)를 보장할 수 있다.
+* 싱글톤 패턴을 구현할 때 사용하기도 한다.
+* 질문1) 특정 enum 타입이 가질 수 있는 모든 값을 순회하며 출력하라
+* 질문2) enum은 자바의 클래스처럼 생성자, 메소드, 필드를 가질 수 있는가?
+* 질문3) enum 값은 == 연산자로 비교가 가능한가?
+  * equals를 쓸수도 있지만 굳이 쓸필요가 없다. == 연산자는 null 예외도 발생할 여지가 없다.
+* 과제) enum을 key로 사용하는 Map을 정의하세요. 또는 enum을 담고 있는 set을 만들어보세요.
+
+**EnumSet**
+
+EnumSet을 사용할 때 유의해야할 점이 있습니다.
+
+EnumSet에는 열거형 값만 저장할 수 있습니다. 그리고 모든 값은 같은 열거형에 속해야합니다.
+
+EnumSet에는 null을 추가할 수 없습니다. 만약 추가하려고 한다면 NullPointerException이 발생하게 됩니다.
+
+EnumSet은 thread-safe하지 않습니다. 만약 동기화가 필요하다면, 외부에서 동기화 처리를 해주어야 합니다.
+
+요소들은 열거형에 정의된 순서에 따라 저장됩니다.
+
+EnumSet은 복사시에 실패에 안전한 반복자를 사용하므로 컬렉션이 반복되는 도중에 변경되어도 ConcurrentModificationException이 발생하지 않습니다.
+
+EnumSet
+
+EnumSet은 Enum의 요소를 Set으로 만든 것인데, 이 때 요소는 enum 에 선언된 순서대로 저장됩니다.
+
+EnumSet은 산술 비트 연산을 사용하기 때문에, 계산이 매우 빠릅니다.
+
+```java
+EnumSet<Status> statuses = EnumSet.allOf(Status.class); // Enum 요소 모두 포함
+EnumSet<Status> range = EnumSet.range(Status.RUNNING, Status.FINISH); // range에 들어간 것만
+EnumSet<Status> complementOf = EnumSet.complementOf(EnumSet.of(Status.RUNNING, Status.FINISH)); // 특정 요소 제외하고 나머지
+```
+
+EnumMap
+
+EnumMap 은 Enum만 키로 사용하는 Map을 말합니다. 
+
+이때 요소의 선언 순서인 ordinal을 이용해 Array로 데이터를 저장합니다.  
+
+또한 부수적인 자료형 또한 필요하지 않으므로 메모리를 효율적으로 사용할 수 있습니다.
+
+Enum 요소를 Key로 사용해야 된다면 EnumMap을 고려해보는게 좋습니다.
+
+```
+EnumMap<Status, String> activityMap = new EnumMap(Status.class);
+activityMap.put(Status.START, "start-test");
+activityMap.put(Status.RUNNING, "running-test");
+activityMap.put(Status.FINISH, "finish-test");
+
+activityMap.forEach((key,value) -> log.info("key={}, value={}", key, value)); 
+```
 
 ## Item 3
 

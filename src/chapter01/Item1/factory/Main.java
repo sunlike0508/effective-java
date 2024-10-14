@@ -1,7 +1,4 @@
-package chapter02.Item1.factory;
-
-import java.util.Optional;
-import java.util.ServiceLoader;
+package chapter01.Item1.factory;
 
 public class Main {
 
@@ -9,7 +6,7 @@ public class Main {
         HelloService eng = HelloService.of("ko");
         System.out.println(eng.hello());
 
-        
+
 //        ServiceLoader<HelloService> loader = ServiceLoader.load(HelloService.class);
 //
 //        Optional<HelloService> helloServiceOptional = loader.findFirst();
