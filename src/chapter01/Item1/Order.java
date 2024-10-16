@@ -3,6 +3,7 @@ package chapter01.Item1;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.EnumSet;
+import chapter01.Item1.solution1.OrderStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
