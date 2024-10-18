@@ -161,6 +161,16 @@ activityMap.forEach((key,value) -> log.info("key={}, value={}", key, value));
 
 https://docs.oracle.com/javase/tutorial/sound/SPI-intro.html
 
+### 완벽 공략 5. 리플랙션
+
+reflection
+
+* 클래스로더를 통해 읽어온 클래스 정보(거울에 반사"된 정보를 사용하는 기술
+* 리플렉션을 사용해 클래스를 읽어오거나 , 인스턴스를 만들거나 메소드를 실행하거나 필드의 값을 가져오거나 변경하는 것이 가능하다.
+* 언제 사용할까?
+  * 특정 애노테이션이 붙어있는 필드 또는 메소드 읽어오기 Junit, Spring
+  * 특정 이름 패턴에 해당하는 메소드 목록 가져와 호출하기 (Getter, Setter)
+
 ## Item 3
 
 ## Item 4
